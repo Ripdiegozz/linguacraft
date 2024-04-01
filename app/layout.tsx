@@ -8,6 +8,13 @@ const font = Nunito({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Linguacraft",
   description: "Language learning app for everyone",
+  icons: [
+    {
+      rel: "favicon",
+      url: "/favicon.svg",
+      href: "/favicon.svg",
+    }
+  ]
 };
 
 export default function RootLayout({
@@ -18,6 +25,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
         <body className={font.className}>{children}</body>
       </html>
     </ClerkProvider>
