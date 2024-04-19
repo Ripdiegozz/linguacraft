@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/sonner";
 
 const font = Nunito({ subsets: ["latin"] });
 
@@ -13,8 +14,8 @@ export const metadata: Metadata = {
       rel: "favicon",
       url: "/favicon.svg",
       href: "/favicon.svg",
-    }
-  ]
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -25,8 +26,18 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
-        <body className={font.className}>{children}</body>
+        <head>
+          <link
+            rel="shortcut icon"
+            href="/assets/app/mascot.svg"
+            type="image/x-icon"
+          />
+        </head>
+
+        <body className={font.className}>
+          <Toaster />
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
