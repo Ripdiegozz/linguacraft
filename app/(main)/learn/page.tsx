@@ -1,6 +1,11 @@
 import React from "react";
 import { redirect } from "next/navigation";
-import { getUnits, getUserProgress } from "@/db/queries";
+import {
+  getCourseProgress,
+  getLessonPercentage,
+  getUnits,
+  getUserProgress,
+} from "@/db/queries";
 import Unit from "@/app/(main)/learn/unit";
 import Header from "@/app/(main)/learn/header";
 import UserProgress from "@/components/user-progress";
@@ -10,13 +15,22 @@ import { StickyWrapper } from "@/components/sticky-wrapper";
 const LearnPage = async () => {
   const userProgressData = await getUserProgress();
   const unitsData = await getUnits();
-  const [userProgress, units] = await Promise.all([
+  const courseProgressData = await getCourseProgress();
+  const lessonPercentageData = await getLessonPercentage();
+
+  const [userProgress, units, courseProgress, lessonPercentage] = await Promise.all([
     userProgressData,
     unitsData,
+    courseProgressData,
+    lessonPercentageData,
   ]);
 
   if (!userProgress || !userProgress.activeCourse) {
-    return redirect("/courses");
+    redirect("/courses");
+  }
+
+  if (!courseProgress) {
+    redirect("/courses");
   }
 
   return (
@@ -40,8 +54,8 @@ const LearnPage = async () => {
                 description={unit.description}
                 title={unit.title}
                 lessons={unit.lessons}
-                activeLesson={undefined}
-                activeLessonPercentage={0}
+                activeLesson={courseProgress?.activeLesson}
+                activeLessonPercentage={lessonPercentage}
               />
             </div>
           ))}

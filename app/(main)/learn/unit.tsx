@@ -33,7 +33,7 @@ const Unit = ({
       <UnitBanner title={title} description={description} />
       <div className="flex items-center flex-col relative">
         {lessons.map((lesson, _idx) => {
-          const isCurrent = true || lesson.id === activeLesson?.id; // TODO: Remove Hardcoded value and implement real logic
+          const isCurrent = lesson.id === activeLesson?.id;
           const isLocked = !lesson.completed && !isCurrent;
 
           return (
