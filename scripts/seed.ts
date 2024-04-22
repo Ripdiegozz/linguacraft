@@ -74,9 +74,11 @@ const main = async () => {
             text: "Seville",
             isCorrect: false
         }]);
+
+        console.log("Database seeded successfully.");
     } catch (error) {
         console.error(error);
-        throw new Error("Failed to seed database");
+        throw new Error("Failed to seed database.");
     }
 }
 
