@@ -21,8 +21,6 @@ const LessonPage = async () => {
     100;
   
   return (
-    <div>
-      <h2>Lesson Page</h2>
       <Quiz
         initialLessonId={lesson.id}
         initialLessonChallenges={lesson.challenges}
@@ -30,7 +28,6 @@ const LessonPage = async () => {
         initialHearts={userProgress.hearts}
         userSubscription={null}
       />
-    </div>
   );
 };
 
