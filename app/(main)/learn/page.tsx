@@ -1,10 +1,11 @@
 import React from "react";
+import { redirect } from "next/navigation";
+import { getUnits, getUserProgress } from "@/db/queries";
+import Unit from "@/app/(main)/learn/unit";
+import Header from "@/app/(main)/learn/header";
+import UserProgress from "@/components/user-progress";
 import { FeedWrapper } from "@/components/feed-wrapper";
 import { StickyWrapper } from "@/components/sticky-wrapper";
-import Header from "./header";
-import UserProgress from "@/components/user-progress";
-import { getUnits, getUserProgress } from "@/db/queries";
-import { redirect } from "next/navigation";
 
 const LearnPage = async () => {
   const userProgressData = await getUserProgress();
@@ -32,25 +33,16 @@ const LearnPage = async () => {
         <Header title={userProgress.activeCourse.title} />
         <div className="space-y-4">
           {units.map((unit) => (
-            <div key={unit.id}>
-              <h2 className="text-lg font-bold">{unit.title}</h2>
-              <div className="space-y-4">
-                {unit.lessons.map((lesson) => (
-                  <div
-                    key={lesson.id}
-                    className="flex items-center justify-between"
-                  >
-                    <h3 className="text-base font-bold">{lesson.title}</h3>
-                    <span
-                      className={`text-sm font-bold ${
-                        lesson.completed ? "text-green-500" : "text-neutral-400"
-                      }`}
-                    >
-                      {lesson.completed ? "Completed" : "In progress"}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            <div key={unit.id} className="mb-10">
+              <Unit
+                id={unit.id}
+                order={unit.order}
+                description={unit.description}
+                title={unit.title}
+                lessons={unit.lessons}
+                activeLesson={undefined}
+                activeLessonPercentage={0}
+              />
             </div>
           ))}
         </div>
