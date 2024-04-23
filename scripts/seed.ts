@@ -27,8 +27,7 @@ const main = async () => {
       { id: 2, title: "French", imageSrc: "/assets/flags/fr.svg" },
       { id: 3, title: "German", imageSrc: "/assets/flags/de.svg" },
       { id: 4, title: "Italian", imageSrc: "/assets/flags/jp.svg" },
-      { id: 5, title: "Portuguese", imageSrc: "/assets/flags/br.svg" },
-      { id: 6, title: "English", imageSrc: "/assets/flags/uk.svg" },
+      { id: 5, title: "Portuguese", imageSrc: "/assets/flags/br.svg" }
     ]);
 
     await db.insert(schema.units).values([
@@ -96,6 +95,16 @@ const main = async () => {
       },
     ]);
 
+    await db.insert(schema.challenges).values([
+      {
+        id: 2,
+        lessonId: 1,
+        type: "ASSIST",
+        question: "How do you say 'hello' in Spanish?",
+        order: 2,
+      },
+    ]);
+
     await db.insert(schema.challengesOptions).values([
       {
         id: 1,
@@ -119,6 +128,33 @@ const main = async () => {
         id: 3,
         challengeId: 1,
         text: "Seville",
+        isCorrect: false,
+      },
+    ]);
+
+    await db.insert(schema.challengesOptions).values([
+      {
+        id: 4,
+        challengeId: 2,
+        text: "Adios",
+        isCorrect: false,
+      },
+    ]);
+
+    await db.insert(schema.challengesOptions).values([
+      {
+        id: 5,
+        challengeId: 2,
+        text: "Hola",
+        isCorrect: true,
+      },
+    ]);
+
+    await db.insert(schema.challengesOptions).values([
+      {
+        id: 6,
+        challengeId: 2,
+        text: "Buenos dias",
         isCorrect: false,
       },
     ]);
